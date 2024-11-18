@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Manager Vue Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="v-focus-manager.js"></script>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .button {
+            padding: 15px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .image {
+            margin: 20px;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Focus Manager Vue Demo</h1>
+        <nav>
+            <button class="v-focusable button" @click="showAlert('Movies')">Movies</button>
+            <button class="v-focusable button" @click="showAlert('TV Series')">TV Series</button>
+            <button class="v-focusable button" @click="showAlert('Documentaries')">Documentaries</button>
+        </nav>
+        <div class="content">
+            <button class="v-focusable button" @click="showAlert('Watch Now')">Watch Now</button>
+            <button class="v-focusable button" @click="showAlert('Trailer')">Trailer</button>
+            <button class="v-focusable button" @click="overrideNextKeyPress">Override Next Key Press</button>
+        </div>
+        <div class="focus-style-buttons">
+            <h2>Change Focus Styles</h2>
+            <button
+                class="button"
+                @click="changeFocusStyle({
+                    border: true,
+                    borderColor: '#00ff00',
+                    borderThickness: '3px',
+                    backgroundColor: 'lightyellow',
+                    animate: true,
+                    animationStyle: 'zoom'
+                })"
+            >
+                Green Border with Zoom Animation
+            </button>
+            <button
+                class="button"
+                @click="changeFocusStyle({
+                    border: true,
+                    borderColor: '#ff0000',
+                    borderThickness: '4px',
+                    backgroundColor: 'lightpink',
+                    animate: true,
+                    animationStyle: 'bounce'
+                })"
+            >
+                Red Border with Bounce Animation
+            </button>
+        </div>
+        <div class="extra-controls">
+            <h2>Additional Controls</h2>
+            <input type="range" min="0" max="100" class="v-focusable slider" />
+            <div>
+                <label>
+                    <input type="checkbox" class="v-focusable checkbox" /> Option 1
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" class="v-focusable checkbox" /> Option 2
+                </label>
+            </div>
+            <div class="images">
+                <img
+                    class="v-focusable image"
+                    src="https://picsum.photos/1920/1080?random"
+                    alt="Random Unsplash 1"
+                />
+                <img
+                    class="v-focusable image"
+                    src="https://picsum.photos/1920/1080?random"
+                    alt="Random Unsplash 2"
+                />
+                <img
+                    class="v-focusable image"
+                    src="https://picsum.photos/1920/1080?random"
+                    alt="Random Unsplash 3"
+                />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                showAlert(message) {
+                    alert(message);
+                },
+                changeFocusStyle(styleConfig) {
+                    window.changeFocusStyle(styleConfig);
+                },
+                overrideNextKeyPress() {
+                    window.focusManager.overrideNextKeyDown((e) => {
+                        e.preventDefault();
+                        alert('Override: Key pressed was ' + e.key);
+                    });
+                }
+            },
+            mounted() {
+                // Initialize FocusManager
+                window.focusManager = new FocusManager({
+                    'w': 'ArrowUp',
+                    's': 'ArrowDown',
+                    'a': 'ArrowLeft',
+                    'd': 'ArrowRight'
+                });
+                // Set initial focus style
+                window.changeFocusStyle({
+                    border: true,
+                    borderColor: '#ff00ff',
+                    borderThickness: '5px',
+                    backgroundColor: 'aqua',
+                    animate: true,
+                    animationStyle: 'fadeIn'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

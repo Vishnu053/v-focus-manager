@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUBEXtrAA UI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="v-focus-manager.js" defer></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <header class="flex justify-between items-center p-5 bg-gray-800">
+        <nav class="flex space-x-5">
+            <a href="#" class="v-focusable text-lg text-white hover:text-yellow-500">Movies</a>
+            <a href="#" class="v-focusable text-lg text-white hover:text-yellow-500">TV Series</a>
+            <a href="#" class="v-focusable text-lg text-white hover:text-yellow-500">Documentaries</a>
+        </nav>
+        <div class="flex items-center space-x-5">
+            <span class="text-2xl font-bold">CUBEXtrAA</span>
+            <div class="" aria-label="Search">
+                <input type="text" placeholder="Search..." class="v-focusable px-3 py-2 rounded-lg border-none focus:outline-none text-gray-900">
+            </div>
+            <button class="v-focusable px-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Sign Up</button>
+        </div>
+    </header>
+    
+    <main class="p-10">
+        <section class="flex justify-between items-center mb-20">
+            <div class="space-y-5">
+                <h1 class="v-focusable text-5xl font-bold">DUNE</h1>
+                <h2 class="text-2xl text-yellow-500">Part One</h2>
+                <p class="max-w-md leading-relaxed">A mythic and emotionally charged hero's journey...</p>
+                <div class="ratings v-focusable text-2xl">⭐⭐⭐⭐⭐</div>
+                <div class="space-x-5">
+                    <button class="v-focusable px-5 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Watch Now</button>
+                    <button class="v-focusable px-5 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Trailer</button>
+                </div>
+            </div>
+            <div class="movie-image">
+                <img src="dune.jpg" alt="Dune" class="max-w-sm rounded-lg">
+            </div>
+        </section>
+
+        <section class="suggestions">
+            <h3 class="text-3xl mb-5">You may also like</h3>
+            <div class="suggested-movies flex space-x-5">
+                <img class="v-focusable w-36 h-56 object-cover rounded-lg cursor-pointer" src="arrival.jpg" alt="Arrival">
+                <img class="v-focusable w-36 h-56 object-cover rounded-lg cursor-pointer" src="dune-part2.jpg" alt="Dune Part Two">
+                <img class="v-focusable w-36 h-56 object-cover rounded-lg cursor-pointer" src="blade-runner.jpg" alt="Blade Runner">
+                <img class="v-focusable w-36 h-56 object-cover rounded-lg cursor-pointer" src="tomorrow-war.jpg" alt="The Tomorrow War">
+                <img class="v-focusable w-36 h-56 object-cover rounded-lg cursor-pointer" src="star-wars.jpg" alt="Star Wars">
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            new FocusManager();
+        });
+    </script>
+</body>
+</html>

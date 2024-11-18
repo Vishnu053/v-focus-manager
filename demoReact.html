@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Manager React Test</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="v-focus-manager.js" defer></script>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .button {
+            padding: 15px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .image {
+            margin: 20px;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class App extends React.Component {
+            componentDidMount() {
+                // Initialize FocusManager
+                window.focusManager = new FocusManager();
+                // Custom style example
+                window.changeFocusStyle({
+                    border: true,
+                    borderColor: "#ff00ff",
+                    borderThickness: "5px",
+                    backgroundColor: "aqua",
+                    animate: true,
+                    animationStyle: "fadeIn"
+                });
+            }
+
+            handleOverrideKeyPress = () => {
+                window.focusManager.overrideNextKeyDown((e) => {
+                    e.preventDefault();
+                    alert("Override: Key pressed was " + e.key);
+                });
+            };
+
+            handleChangeFocusStyle = (style) => {
+                window.changeFocusStyle(style);
+            };
+
+            render() {
+                return (
+                    <div className="container">
+                        <h1>Focus Manager React Test</h1>
+                        <nav>
+                            <button className="v-focusable button">Movies</button>
+                            <button className="v-focusable button">TV Series</button>
+                            <button className="v-focusable button">Documentaries</button>
+                        </nav>
+                        <div className="content">
+                            <button className="v-focusable button">Watch Now</button>
+                            <button className="v-focusable button">Trailer</button>
+                            <button className="v-focusable button" onClick={this.handleOverrideKeyPress}>
+                                Override Next Key Press
+                            </button>
+                        </div>
+                        <div className="focus-style-buttons">
+                            <h2>Change Focus Styles</h2>
+                            <button
+                                className="button"
+                                onClick={() =>
+                                    this.handleChangeFocusStyle({
+                                        border: true,
+                                        borderColor: "#00ff00",
+                                        borderThickness: "3px",
+                                        backgroundColor: "lightyellow",
+                                        borderRadius: "10px",
+                                        animate: true,
+                                        animationStyle: "zoom"
+                                    })
+                                }
+                            >
+                                Green Border with Zoom Animation
+                            </button>
+                            <button
+                                className="button"
+                                onClick={() =>
+                                    this.handleChangeFocusStyle({
+                                        border: true,
+                                        borderColor: "#ff0000",
+                                        borderThickness: "4px",
+                                        backgroundColor: "lightpink",
+                                        animate: true,
+                                        animationStyle: "bounce"
+                                    })
+                                }
+                            >
+                                Red Border with Bounce Animation
+                            </button>
+                        </div>
+                        <div className="extra-controls">
+                            <h2>Additional Controls</h2>
+                            <input type="range" min="0" max="100" className="v-focusable slider" />
+                            <div>
+                                <label>
+                                    <input type="checkbox" className="v-focusable checkbox" /> Option 1
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input type="checkbox" className="v-focusable checkbox" /> Option 2
+                                </label>
+                            </div>
+                            <div className="images">
+                                <img
+                                    className="v-focusable image"
+                                    src="https://picsum.photos/1920/1080?random"
+                                    alt="Random Unsplash 1"
+                                />
+                                <img
+                                    className="v-focusable image"
+                                    src="https://picsum.photos/1920/1080?random"
+                                    alt="Random Unsplash 2"
+                                />
+                                <img
+                                    className="v-focusable image"
+                                    src="https://picsum.photos/1920/1080?random"
+                                    alt="Random Unsplash 3"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
